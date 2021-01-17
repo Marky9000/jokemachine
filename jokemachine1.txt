@@ -1,0 +1,191 @@
+API++++++++++++++
+
+let firstName = null;
+let lastName = null;
+const jokeMachine = async () => {
+    try {
+        const apiUrl = `https://cors-anywhere.herokuapp.com/http://api.icndb.com/jokes/random?firstName=${firstName}&lastName=${lastName}`
+        const response = await fetch(apiUrl)
+        return await response.json()
+    } catch (error) {
+        console.error(error)
+    }
+
+}
+
+js++++++++++++++
+
+const pushBtn = document.querySelector('.btn');
+const inputFirstName = document.querySelector('#input-first-name');
+const inputLastName = document.querySelector('#input-last-name');
+const jokeList = document.querySelector('#joke-list');
+
+inputFirstName.addEventListener('keyup', (event) => {
+    firstName = event.target.value
+});
+inputLastName.addEventListener('keyup', (event) => {
+    lastName = event.target.value
+});
+
+
+pushBtn.addEventListener('click', () => {
+    if (inputFirstName.value !== "" && inputLastName.value !== "") {
+        jokeList.innerHTML = '';
+        jokeMachine().then(data => {
+            const jokeID = document.createElement('li')
+            const newJoke = document.createElement('li');
+            jokeID.innerHTML = `#${data.value.id}`;
+            newJoke.innerHTML = `${data.value.joke}`;
+            jokeList.append(jokeID);
+            jokeList.append(newJoke);
+            console.log(data.value)
+        });
+    } else { alert('You have to enter both names first...'); }
+});
+++++++++++++++CSS
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Luckiest+Guy&display=swap');
+*{
+ padding: 0;
+ margin: 0;
+ box-sizing: border-box;   
+ user-select: none;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    outline: none;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Indie Flower', cursive;
+    background: rgb(240,157,39);
+    background: linear-gradient(90deg, rgba(240,157,39,1) 0%, rgba(154,228,184,0.9304096638655462) 45%, rgba(0,212,255,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .container{
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(280px,auto) auto;
+  }
+h1{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 5px;
+    color: rgba(255, 255, 255, 0.438);
+    font-family: 'Luckiest Guy', cursive;
+    text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+#main{
+          
+    border-radius: 3px;
+}
+.btn{
+    transform: rotateZ(25deg);
+    margin-top: 100px;
+    width: 200px;
+    height: 200px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 30px;
+        box-shadow: 10px 10px 7px 0px rgba(105, 105, 105, 0.623);
+    
+}
+.btn:hover{
+    font-size: 27px;
+    cursor: pointer;
+    box-shadow: 10px 10px 7px -19px rgba(105,105,105,1);
+    color: rgb(255, 255, 255);
+    transform: scale(0.95) rotateZ(25deg);
+    transition: 100ms;
+     border: 1px solid rgb(255, 255, 255);
+    
+}
+#joke-list{
+      color: rgba(62, 107, 124, 0.712);
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+       
+    
+}
+#joke-list li:first-child{
+    font-size: 50px;
+    color: orange;
+    letter-spacing: 5px;
+}
+#joke-list li{
+    display: block;
+    margin: 20px;
+    font-size: 40px;
+}
+::placeholder{
+    opacity: .4;
+}
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+input{
+     width: 300px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.678);
+    font-size: 15px;
+    margin-top: 20px;
+    border-radius: 3px;
+    border: 1px solid rgb(197, 197, 197);
+    color: rgba(47, 67, 80, 0.678);
+    outline: none;
+    padding: 10px;
+    letter-spacing: 5px;
+}
+@media(min-width:700px){
+    .container{
+        max-width: 70%;
+    }
+}
+
+HTML++++++++++++
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Joke-Machine</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <script defer src="api_script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Push the Button for a joke</h1>
+        <ul id="joke-list"></ul>
+        <main id="main">
+            <div class="wrap">
+                <input type="text" id="input-first-name" placeholder="First name.." required>
+                <input type="text" id="input-last-name" placeholder="Last name.." required>
+                <div class="btn">PUSH ME</div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

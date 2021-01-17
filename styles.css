@@ -1,0 +1,86 @@
+.theater {
+  width: 100%;
+  margin: auto;
+  z-index: -1;
+}
+
+.container {
+  position: relative;
+}
+.bellImage {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  margin: auto;
+  z-index: 2;
+}
+.textClass {
+  position: relative;
+
+  top: 0px;
+  z-index: 4;
+}
+.pointer {
+  position: absolute;
+  top: 80%;
+  bottom: 30%;
+  left: 7%;
+
+  margin: auto;
+  z-index: 2;
+}
+.jokeText {
+  position: absolute;
+  top: 20%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  margin: auto;
+  z-index: 2;
+}
+@media (min-width: 320px) {
+  .bellImage {
+    top: 80%;
+    bottom: 30%;
+  }
+  .pointer {
+    width: 120px;
+  }
+  .bellImage {
+    width: 240px;
+  }
+}
+.textClass {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2;
+}
+
+@media (min-width: 800px) {
+  .bellImage {
+    top: 85%;
+    bottom: 25%;
+  }
+  .bellImage {
+    width: 300px;
+  }
+  .pointer {
+    width: 200px;
+    left: 15%;
+  }
+}
+p {
+  font-size: 1.5em;
+  padding: 30px;
+  margin: 15px;
+
+  font-family: "Lobster", cursive;
+  color: aliceblue;
+  text-align: center;
+  text-shadow: 4px rgb(77, 10, 21);
+}
